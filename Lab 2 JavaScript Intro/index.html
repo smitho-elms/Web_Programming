@@ -6,9 +6,27 @@
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-      
-      
+            <script>
+                // Get current date and hour
+                var today = new Date();
+                var hour = today.getHours();
+                // First, alert the current hour
+                alert("Current hour: " + hour);
 
-        
+                // Greet based on hour
+                if (hour < 12) {
+                    alert("Good morning!");
+                } else if (hour >= 12 && hour < 18) {
+                    alert("Good afternoon!");
+                } else {
+                    alert("Good evening!");
+                }
+
+                // Currency Converter: USD to Japanese Yen
+                var usd = prompt("Enter dollar amount to convert to Yen:");
+                var rate = 147.5; // 1 USD = 147.5 JPY
+                var yen = usd * rate;
+                alert(usd + " US dollars is " + yen.toFixed(2) + " yen.");
+            </script>        
     </body>
 </html>
