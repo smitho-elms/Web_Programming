@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Web Programming Labs Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding: 2em; }
+        iframe { width: 100%; height: 600px; border: 1px solid #ccc; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Web Programming Labs</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 1 HTML/index.html')">Lab 1 HTML</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 2 JavaScript Intro/index.html')">Lab 2 JavaScript Intro</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 3 Currency Converter UI/index.html')">Lab 3 Currency Converter UI</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 4 Landmark Tour/index.html')">Lab 4 Landmark Tour</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 5 Canvas Game/index.html')">Lab 5 Canvas Game</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 6 Python Streamlit/README.md')">Lab 6 Python Streamlit</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 7 React Pokedex/index.html')">Lab 7 React Pokedex</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 8 NodeJS Database/README.md')">Lab 8 NodeJS Database</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="loadLab('Lab 9 Fullstack/README.md')">Lab 9 Fullstack</a></li>
+        </ul>
+      </div>
+    </nav>
+    <iframe id="labFrame" src="Lab 1 HTML/index.html"></iframe>
+    <script>
+      function loadLab(path) {
+        document.getElementById('labFrame').src = path;
+      }
+    </script>
+</body>
+</html>
