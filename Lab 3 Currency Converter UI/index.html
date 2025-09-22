@@ -6,11 +6,20 @@
         <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-      <!-- Add UI for Currency Converter -->
+   <!-- Add UI for Currency Converter -->
+   <h2>USD &lt;--&gt; Rubles Currency Converter</h2>
+   <div id="converter">
+     <label for="usdInput">US Dollars:</label>
+     <input type="number" id="usdInput" min="0" step="any" />
+     <br><br>
+     <label for="rubInput">Rubles:</label>
+     <input type="number" id="rubInput" min="0" step="any" />
+     <br><br>
+     <button id="convertBtn" onclick="convert()">Convert</button>
+   </div>
 
-      
-      <!-- The JavaScript code is attached at the bottom of the page
-           after the page is completely loaded. Write your code in script.js. -->
-      <script src="script.js"></script>
+   <!-- The JavaScript code is attached at the bottom of the page
+     after the page is completely loaded. Write your code in script.js. -->
+   <script src="script.js"></script>
     </body>
 </html>
