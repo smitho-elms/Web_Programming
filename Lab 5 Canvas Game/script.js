@@ -63,10 +63,10 @@ function draw() {
     ctx.textAlign = 'center';
     ctx.fillText('Badgers & Bombs', canvas.width / 2, PADDING / 2);
     
-    // Draw score
+    // Draw badger count
     ctx.font = '18px Arial';
     ctx.textAlign = 'left';
-    ctx.fillText('Score: ' + score, PADDING, PADDING - 10);
+    ctx.fillText('Badgers Caught: ' + score, PADDING, PADDING - 10);
     
     // Draw game elements
     ctx.drawImage(targetImage, targetX, targetY, IMAGE_SIZE, IMAGE_SIZE);
@@ -92,11 +92,15 @@ canvas.addEventListener('mousedown', (event) => {
     
     // Check collisions
     if (isCollision(clickX, clickY, targetX, targetY)) {
-        score += 10;
-        alert('Hit! Score: ' + score);
+        score += 1;
+        alert('You caught a badger! Total caught: ' + score);
     } else if (isCollision(clickX, clickY, obstacleX, obstacleY)) {
-        score -= 5;
-        alert('Oops! Hit obstacle. Score: ' + score);
+        if (score > 0) {
+            score -= 1;
+            alert('Oh no! The bomb scared away a badger! Badgers remaining: ' + score);
+        } else {
+            alert('Lucky you have no badgers to lose!');
+        }
     }
 });
 
