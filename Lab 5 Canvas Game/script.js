@@ -16,16 +16,16 @@ function getRandomPosition() {
 }
 
 // Initialize positions
-let targetX = getRandomPosition().x;
-let targetY = getRandomPosition().y;
-let obstacleX = getRandomPosition().x;
-let obstacleY = getRandomPosition().y;
+let badgerX = getRandomPosition().x;
+let badgerY = getRandomPosition().y;
+let bombX = getRandomPosition().x;
+let bombY = getRandomPosition().y;
 
 // Load game images
-const targetImage = new Image();
-targetImage.src = 'images/badger.jpg';
-const obstacleImage = new Image();
-obstacleImage.src = 'images/bomb.png';
+const badgerImage = new Image();
+badgerImage.src = 'images/badger.jpg';
+const bombImage = new Image();
+bombImage.src = 'images/bomb.png';
 
 // Function to check collision between click and image
 function isCollision(clickX, clickY, imageX, imageY) {
@@ -69,32 +69,32 @@ function draw() {
     ctx.fillText('Badgers Caught: ' + score, PADDING, PADDING - 10);
     
     // Draw game elements
-    ctx.drawImage(targetImage, targetX, targetY, IMAGE_SIZE, IMAGE_SIZE);
-    ctx.drawImage(obstacleImage, obstacleX, obstacleY, IMAGE_SIZE, IMAGE_SIZE);
+    ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
+    ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
 }
 
 // Moves images to random positions
 setInterval(() => {
-    const targetPos = getRandomPosition();
-    const obstaclePos = getRandomPosition();
+    const badgerPos = getRandomPosition();
+    const bombPos = getRandomPosition();
     
-    targetX = targetPos.x;
-    targetY = targetPos.y;
-    obstacleX = obstaclePos.x;
-    obstacleY = obstaclePos.y;
-}, 2000);  // Moves every 2 seconds
+    badgerX = badgerPos.x;
+    badgerY = badgerPos.y;
+    bombX = bombPos.x;
+    bombY = bombPos.y;
+}, 2000);
 
-// Handle mouse clicks
+
 canvas.addEventListener('mousedown', (event) => {
     const rect = canvas.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const clickY = event.clientY - rect.top;
     
-    // Check collisions
-    if (isCollision(clickX, clickY, targetX, targetY)) {
+    // Checks collisions
+    if (isCollision(clickX, clickY, badgerX, badgerY)) {
         score += 1;
         alert('You caught a badger! Total caught: ' + score);
-    } else if (isCollision(clickX, clickY, obstacleX, obstacleY)) {
+    } else if (isCollision(clickX, clickY, bombX, bombY)) {
         if (score > 0) {
             score -= 1;
             alert('Oh no! The bomb scared away a badger! Badgers remaining: ' + score);
