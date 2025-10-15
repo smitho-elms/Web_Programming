@@ -24,28 +24,34 @@ let bombY = getRandomPosition().y;
 // Load game images
 const badgerImage = new Image();
 const bombImage = new Image();
-let imagesLoaded = 0;
+let badgerLoaded = false;
+let bombLoaded = false;
 
 badgerImage.onload = () => {
-    imagesLoaded++;
-    startGameIfReady();
-};
-bombImage.onload = () => {
-    imagesLoaded++;
-    startGameIfReady();
+    badgerLoaded = true;
+    startGame();
 };
 badgerImage.onerror = () => {
+    badgerLoaded = false;
     alert('Failed to load Badger.jpg. Please check the images folder and file name.');
+    startGame();
+};
+bombImage.onload = () => {
+    bombLoaded = true;
+    startGame();
 };
 bombImage.onerror = () => {
+    bombLoaded = false;
     alert('Failed to load Bomb.png. Please check the images folder and file name.');
+    startGame();
 };
 badgerImage.src = 'images/Badger.jpg';
 bombImage.src = 'images/Bomb.png';
 
-function startGameIfReady() {
-    if (imagesLoaded === 2) {
-        // Start the game loop and movement only after both images are loaded
+let gameStarted = false;
+function startGame() {
+    if (!gameStarted) {
+        gameStarted = true;
         setInterval(draw, 1000/60);  // 60 FPS
         setInterval(() => {
             const badgerPos = getRandomPosition();
@@ -100,19 +106,19 @@ function draw() {
     ctx.fillText('Badgers Caught: ' + score, PADDING, PADDING - 10);
     
     // Draw game elements
-    // Badger fallback
-    if (badgerImage.width === 0 || badgerImage.height === 0) {
+    // Badger
+    if (badgerLoaded) {
+        ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
+    } else {
         ctx.fillStyle = 'green';
         ctx.fillRect(badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
-    } else {
-        ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
     }
-    // Bomb fallback
-    if (bombImage.width === 0 || bombImage.height === 0) {
+    // Bomb
+    if (bombLoaded) {
+        ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
+    } else {
         ctx.fillStyle = 'red';
         ctx.fillRect(bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
-    } else {
-        ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
     }
 }
 
