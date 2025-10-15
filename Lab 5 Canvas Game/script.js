@@ -67,8 +67,8 @@ bombImage.onerror = () => {
         bombLoaded = true;
         startGame();
 };
-badgerImage.src = 'images/badger.jpg';
-bombImage.src = 'images/bomb.png';
+badgerImage.src = 'Images/badger.jpg';
+bombImage.src = 'Images/bomb.png';
 
 let gameStarted = false;
 function startGame() {
