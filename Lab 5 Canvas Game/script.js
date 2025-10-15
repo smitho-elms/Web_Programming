@@ -21,14 +21,14 @@ let badgerY = getRandomPosition().y;
 let bombX = getRandomPosition().x;
 let bombY = getRandomPosition().y;
 
-// Load game images (simple, no debug handlers)
+// Load game images
 const badgerImage = new Image();
 const bombImage = new Image();
 badgerImage.src = 'Images/badger.jpg';
 bombImage.src = 'Images/bomb.png';
 
 // Start the draw loop and movement interval
-setInterval(draw, 1000/60);  // 60 FPS
+setInterval(draw, 1000/60);
 setInterval(() => {
         const badgerPos = getRandomPosition();
         const bombPos = getRandomPosition();
@@ -54,7 +54,7 @@ function drawContainer() {
     ctx.lineWidth = 3;
     ctx.strokeRect(PADDING, PADDING, canvas.width - 2 * PADDING, canvas.height - 2 * PADDING);
     
-    // Add a subtle background for the play area
+    //  Background for play area
     ctx.fillStyle = 'rgba(200, 200, 200, 0.1)';
     ctx.fillRect(PADDING, PADDING, canvas.width - 2 * PADDING, canvas.height - 2 * PADDING);
 }
