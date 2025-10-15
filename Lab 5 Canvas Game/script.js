@@ -34,6 +34,12 @@ bombImage.onload = () => {
     imagesLoaded++;
     startGameIfReady();
 };
+badgerImage.onerror = () => {
+    alert('Failed to load Badger.jpg. Please check the images folder and file name.');
+};
+bombImage.onerror = () => {
+    alert('Failed to load Bomb.png. Please check the images folder and file name.');
+};
 badgerImage.src = 'images/Badger.jpg';
 bombImage.src = 'images/Bomb.png';
 
