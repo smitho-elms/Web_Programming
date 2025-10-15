@@ -23,9 +23,9 @@ let bombY = getRandomPosition().y;
 
 // Load game images
 const badgerImage = new Image();
-badgerImage.src = 'images/badger.jpg';
+badgerImage.src = 'images/Badger.jpg';
 const bombImage = new Image();
-bombImage.src = 'images/bomb.png';
+bombImage.src = 'images/Bomb.png';
 
 // Function to check collision between click and image
 function isCollision(clickX, clickY, imageX, imageY) {
