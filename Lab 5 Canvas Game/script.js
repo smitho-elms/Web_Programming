@@ -100,8 +100,20 @@ function draw() {
     ctx.fillText('Badgers Caught: ' + score, PADDING, PADDING - 10);
     
     // Draw game elements
-    ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
-    ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
+    // Badger fallback
+    if (badgerImage.width === 0 || badgerImage.height === 0) {
+        ctx.fillStyle = 'green';
+        ctx.fillRect(badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
+    } else {
+        ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
+    }
+    // Bomb fallback
+    if (bombImage.width === 0 || bombImage.height === 0) {
+        ctx.fillStyle = 'red';
+        ctx.fillRect(bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
+    } else {
+        ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
+    }
 }
 
 // Moves images to random positions
