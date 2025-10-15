@@ -21,70 +21,22 @@ let badgerY = getRandomPosition().y;
 let bombX = getRandomPosition().x;
 let bombY = getRandomPosition().y;
 
-// Load game images
+// Load game images (simple, no debug handlers)
 const badgerImage = new Image();
 const bombImage = new Image();
-let badgerLoaded = false;
-let bombLoaded = false;
-
-badgerImage.onload = () => {
-    badgerLoaded = true;
-    startGame();
-    console.log('badgerImage loaded:', badgerImage.src, 'dimensions', badgerImage.width, badgerImage.height);
-};
-badgerImage.onerror = () => {
-    badgerLoaded = false;
-        alert('Failed to load badger.jpg. Using inline fallback image.');
-        console.error('badgerImage failed to load:', badgerImage.src);
-        // Use a simple inline SVG as a visual fallback
-        const badgerSvg = encodeURIComponent(`
-            <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50'>
-                <rect width='50' height='50' fill='green' />
-                <text x='25' y='30' font-size='18' text-anchor='middle' fill='white'>B</text>
-            </svg>
-        `);
-        badgerImage.src = 'data:image/svg+xml;utf8,' + badgerSvg;
-        badgerLoaded = true;
-        startGame();
-};
-bombImage.onload = () => {
-    bombLoaded = true;
-    startGame();
-    console.log('bombImage loaded:', bombImage.src, 'dimensions', bombImage.width, bombImage.height);
-};
-bombImage.onerror = () => {
-    bombLoaded = false;
-        alert('Failed to load bomb.png. Using inline fallback image.');
-        console.error('bombImage failed to load:', bombImage.src);
-        // Use a simple inline SVG as a visual fallback
-        const bombSvg = encodeURIComponent(`
-            <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50'>
-                <rect width='50' height='50' fill='red' />
-                <text x='25' y='30' font-size='18' text-anchor='middle' fill='white'>!</text>
-            </svg>
-        `);
-        bombImage.src = 'data:image/svg+xml;utf8,' + bombSvg;
-        bombLoaded = true;
-        startGame();
-};
 badgerImage.src = 'Images/badger.jpg';
 bombImage.src = 'Images/bomb.png';
 
-let gameStarted = false;
-function startGame() {
-    if (!gameStarted) {
-        gameStarted = true;
-        setInterval(draw, 1000/60);  // 60 FPS
-        setInterval(() => {
-            const badgerPos = getRandomPosition();
-            const bombPos = getRandomPosition();
-            badgerX = badgerPos.x;
-            badgerY = badgerPos.y;
-            bombX = bombPos.x;
-            bombY = bombPos.y;
-        }, 2000);
-    }
-}
+// Start the draw loop and movement interval
+setInterval(draw, 1000/60);  // 60 FPS
+setInterval(() => {
+        const badgerPos = getRandomPosition();
+        const bombPos = getRandomPosition();
+        badgerX = badgerPos.x;
+        badgerY = badgerPos.y;
+        bombX = bombPos.x;
+        bombY = bombPos.y;
+}, 2000);
 
 // Function to check collision between click and image
 function isCollision(clickX, clickY, imageX, imageY) {
@@ -126,29 +78,10 @@ function draw() {
     ctx.font = '18px Arial';
     ctx.textAlign = 'left';
     ctx.fillText('Badgers Caught: ' + score, PADDING, PADDING - 10);
-    
-    // Debug status on canvas
-    ctx.font = '14px Arial';
-    ctx.fillStyle = '#000';
-    ctx.textAlign = 'left';
-    ctx.fillText('debug - badgerLoaded: ' + badgerLoaded + ' bombLoaded: ' + bombLoaded, PADDING, canvas.height - 30);
-    ctx.fillText('coords - badger(' + Math.round(badgerX) + ',' + Math.round(badgerY) + ') bomb(' + Math.round(bombX) + ',' + Math.round(bombY) + ')', PADDING, canvas.height - 12);
-    
+
     // Draw game elements
-    // Badger
-    if (badgerLoaded) {
-        ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
-    } else {
-        ctx.fillStyle = 'green';
-        ctx.fillRect(badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
-    }
-    // Bomb
-    if (bombLoaded) {
-        ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
-    } else {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
-    }
+    ctx.drawImage(badgerImage, badgerX, badgerY, IMAGE_SIZE, IMAGE_SIZE);
+    ctx.drawImage(bombImage, bombX, bombY, IMAGE_SIZE, IMAGE_SIZE);
 }
 
 // Moves images to random positions
@@ -171,4 +104,3 @@ canvas.addEventListener('mousedown', (event) => {
     }
 });
 
-// Note: draw loop is started by startGame() after image load/error events
