@@ -45,8 +45,8 @@ bombImage.onerror = () => {
     alert('Failed to load Bomb.png. Please check the images folder and file name.');
     startGame();
 };
-badgerImage.src = 'images/Badger.jpg';
-bombImage.src = 'images/Bomb.png';
+badgerImage.src = 'images/badger.jpg';
+bombImage.src = 'images/bomb.png';
 
 let gameStarted = false;
 function startGame() {
