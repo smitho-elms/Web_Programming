@@ -30,20 +30,24 @@ let bombLoaded = false;
 badgerImage.onload = () => {
     badgerLoaded = true;
     startGame();
+    console.log('badgerImage loaded:', badgerImage.src, 'dimensions', badgerImage.width, badgerImage.height);
 };
 badgerImage.onerror = () => {
     badgerLoaded = false;
-    alert('Failed to load Badger.jpg. Please check the images folder and file name.');
+    alert('Failed to load badger.jpg. Please check the images folder and file name.');
     startGame();
+    console.error('badgerImage failed to load:', badgerImage.src);
 };
 bombImage.onload = () => {
     bombLoaded = true;
     startGame();
+    console.log('bombImage loaded:', bombImage.src, 'dimensions', bombImage.width, bombImage.height);
 };
 bombImage.onerror = () => {
     bombLoaded = false;
-    alert('Failed to load Bomb.png. Please check the images folder and file name.');
+    alert('Failed to load bomb.png. Please check the images folder and file name.');
     startGame();
+    console.error('bombImage failed to load:', bombImage.src);
 };
 badgerImage.src = 'images/badger.jpg';
 bombImage.src = 'images/bomb.png';
@@ -105,6 +109,13 @@ function draw() {
     ctx.textAlign = 'left';
     ctx.fillText('Badgers Caught: ' + score, PADDING, PADDING - 10);
     
+    // Debug status on canvas
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'left';
+    ctx.fillText('debug - badgerLoaded: ' + badgerLoaded + ' bombLoaded: ' + bombLoaded, PADDING, canvas.height - 30);
+    ctx.fillText('coords - badger(' + Math.round(badgerX) + ',' + Math.round(badgerY) + ') bomb(' + Math.round(bombX) + ',' + Math.round(bombY) + ')', PADDING, canvas.height - 12);
+    
     // Draw game elements
     // Badger
     if (badgerLoaded) {
@@ -142,5 +153,4 @@ canvas.addEventListener('mousedown', (event) => {
     }
 });
 
-// Start the game loop
-setInterval(draw, 1000/60);  // 60 FPS
+// Note: draw loop is started by startGame() after image load/error events
