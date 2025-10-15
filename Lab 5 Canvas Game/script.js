@@ -34,9 +34,18 @@ badgerImage.onload = () => {
 };
 badgerImage.onerror = () => {
     badgerLoaded = false;
-    alert('Failed to load badger.jpg. Please check the images folder and file name.');
-    startGame();
-    console.error('badgerImage failed to load:', badgerImage.src);
+        alert('Failed to load badger.jpg. Using inline fallback image.');
+        console.error('badgerImage failed to load:', badgerImage.src);
+        // Use a simple inline SVG as a visual fallback
+        const badgerSvg = encodeURIComponent(`
+            <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50'>
+                <rect width='50' height='50' fill='green' />
+                <text x='25' y='30' font-size='18' text-anchor='middle' fill='white'>B</text>
+            </svg>
+        `);
+        badgerImage.src = 'data:image/svg+xml;utf8,' + badgerSvg;
+        badgerLoaded = true;
+        startGame();
 };
 bombImage.onload = () => {
     bombLoaded = true;
@@ -45,9 +54,18 @@ bombImage.onload = () => {
 };
 bombImage.onerror = () => {
     bombLoaded = false;
-    alert('Failed to load bomb.png. Please check the images folder and file name.');
-    startGame();
-    console.error('bombImage failed to load:', bombImage.src);
+        alert('Failed to load bomb.png. Using inline fallback image.');
+        console.error('bombImage failed to load:', bombImage.src);
+        // Use a simple inline SVG as a visual fallback
+        const bombSvg = encodeURIComponent(`
+            <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50'>
+                <rect width='50' height='50' fill='red' />
+                <text x='25' y='30' font-size='18' text-anchor='middle' fill='white'>!</text>
+            </svg>
+        `);
+        bombImage.src = 'data:image/svg+xml;utf8,' + bombSvg;
+        bombLoaded = true;
+        startGame();
 };
 badgerImage.src = 'images/badger.jpg';
 bombImage.src = 'images/bomb.png';
