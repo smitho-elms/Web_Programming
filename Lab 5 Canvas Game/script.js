@@ -23,9 +23,34 @@ let bombY = getRandomPosition().y;
 
 // Load game images
 const badgerImage = new Image();
-badgerImage.src = 'images/Badger.jpg';
 const bombImage = new Image();
+let imagesLoaded = 0;
+
+badgerImage.onload = () => {
+    imagesLoaded++;
+    startGameIfReady();
+};
+bombImage.onload = () => {
+    imagesLoaded++;
+    startGameIfReady();
+};
+badgerImage.src = 'images/Badger.jpg';
 bombImage.src = 'images/Bomb.png';
+
+function startGameIfReady() {
+    if (imagesLoaded === 2) {
+        // Start the game loop and movement only after both images are loaded
+        setInterval(draw, 1000/60);  // 60 FPS
+        setInterval(() => {
+            const badgerPos = getRandomPosition();
+            const bombPos = getRandomPosition();
+            badgerX = badgerPos.x;
+            badgerY = badgerPos.y;
+            bombX = bombPos.x;
+            bombY = bombPos.y;
+        }, 2000);
+    }
+}
 
 // Function to check collision between click and image
 function isCollision(clickX, clickY, imageX, imageY) {
@@ -74,17 +99,6 @@ function draw() {
 }
 
 // Moves images to random positions
-setInterval(() => {
-    const badgerPos = getRandomPosition();
-    const bombPos = getRandomPosition();
-    
-    badgerX = badgerPos.x;
-    badgerY = badgerPos.y;
-    bombX = bombPos.x;
-    bombY = bombPos.y;
-}, 2000);
-
-
 canvas.addEventListener('mousedown', (event) => {
     const rect = canvas.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
