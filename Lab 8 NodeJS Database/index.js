@@ -10,7 +10,7 @@ app.get('/form', function(req, res){
    res.sendFile(__dirname + "/form.html");
 });
  
-// Serve the new account form at /new
+// Serves the new account form
 app.get('/new', function(req, res){
   res.sendFile(__dirname + "/form.html");
 });
@@ -21,12 +21,12 @@ app.post('/insert', function(req, res){
   const password = (req.body.password || '').trim();
   const email = (req.body.email || '').trim();
 
-  // Basic validation
+  // Validation
   if (!email || !username || !password) {
     return res.status(400).send('Missing email, username, or password');
   }
 
-  // Parameterized query to avoid SQL injection
+  
   const sql = 'INSERT INTO Users (Username, Password, Email) VALUES (?, ?, ?)';
   const params = [username, password, email];
 
@@ -41,7 +41,7 @@ app.post('/insert', function(req, res){
   });
 });
 
-// Serve the forgot-password form
+
 app.get('/forgot', function(req, res){
   res.sendFile(__dirname + '/forgot.html');
 });
