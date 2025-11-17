@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Forgot Password</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label { display:block; margin-top: 10px; }
+    input { width: 300px; padding: 6px; }
+    button { margin-top: 12px; padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h1>Retrieve Forgotten Password</h1>
+  <form action="/retrieve" method="post">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" maxlength="20" required>
+    <button type="submit">Retrieve</button>
+  </form>
+  <p><a href="/">Home</a></p>
+</body>
+</html>
