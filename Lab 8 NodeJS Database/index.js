@@ -17,7 +17,6 @@ app.get('/new', function(req, res){
 
 // Handle form submissions from /insert
 app.post('/insert', function(req, res){
-  // Retrieve fields from the form
   const username = (req.body.username || '').trim();
   const password = (req.body.password || '').trim();
   const email = (req.body.email || '').trim();
@@ -38,7 +37,6 @@ app.post('/insert', function(req, res){
     }
 
     console.log('Inserted new user id=', result.insertId, 'username=', username);
-    // Send a simple confirmation to the user (don't show password)
     res.send(`<!doctype html><html><head><meta charset="utf-8"><title>Account Created</title></head><body><h1>Account Created</h1><p>Username: ${username}</p><p>Email: ${email}</p><p>User ID: ${result.insertId}</p><p><a href="/">Home</a> | <a href="/forgot">Forgot Password?</a></p></body></html>`);
   });
 });
